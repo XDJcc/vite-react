@@ -19,7 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    //    配置alias路径别名
+    //    配置alias路径别名提示
     "baseUrl": "./",
     "paths": {
       "@/*": [
