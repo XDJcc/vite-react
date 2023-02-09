@@ -1,10 +1,11 @@
 import {Navigate} from "react-router-dom";
 import {lazy} from "react";
+import Page from "@/pages/Page";
 import React from "react";
-// import Home from "@/pages/home/Home";
-// import About from "@/pages/about/About";
-const Home = lazy(() => import('@/pages/home/Home'))
+
 const About = lazy(() => import('@/pages/about/About'))
+const Page1 = lazy(() => import('@/pages/page1/Page1'))
+const Page404 = lazy(() => import('@/pages/system/404'))
 
 /*
 * 懒加载的组件的需要 提供一个loading提示加载组件
@@ -19,16 +20,26 @@ const withLoading = (comp: JSX.Element) => (
 const routes = [
     {
         path: '/',
-        element: < Navigate to='/home'/>,
+        element: < Navigate to='/page1'/>,
     },
     {
-        path: '/home',
-        element: withLoading(<Home/>)
+        path: '/',
+        element: <Page/>,
+        children: [
+            {
+                path: '/page1',
+                element: withLoading(<Page1/>)
+            },
+            {
+                path: '/about',
+                element: withLoading(<About/>)
+            },
+        ]
     },
     {
-        path: '/about',
-        element: withLoading(<About/>)
-    },
+        path: '*',
+        element: withLoading(<Page404/>)
+    }
 ]
 
 export default routes
